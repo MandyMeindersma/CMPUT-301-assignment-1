@@ -6,7 +6,7 @@ import java.util.Date;
  * Created by meind on 2016-10-01.
  */
 
-public class Habit {
+public class Habit implements Comparable{
 
     private String Habit;
     private Date date;
@@ -40,6 +40,9 @@ public class Habit {
     }
 
 
-
+    @Override
+    public int compareTo(Object o) {
+        return ((Habit) o).getDate().compareTo(this.getDate());
+    }
 }
 
