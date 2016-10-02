@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_add_new"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.meind.meinders_habittracker.AddNew">
+
+    <Button
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/save" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Enter habit here"
+        android:ems="10"
+        android:id="@+id/habitText"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="What days would you like it to happen?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:gravity="center"
+        android:layout_below="@+id/dialog_date_date_picker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
+
+    <DatePicker
+        android:id="@+id/dialog_date_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:calendarViewShown="false"
+        tools:datePickerMode="spinner"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/habitText"
+        android:layout_centerHorizontal="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="bottom"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true">
+
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonSun"
+            android:textOff="Sun"
+            android:textOn="Sun"
+            android:layout_below="@+id/textView2"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/toggle_colors"/>
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonMon"
+            android:textOff="M"
+            android:textOn="M"
+            android:textColor="@color/toggle_colors"
+            android:layout_alignBaseline="@+id/toggleButtonSun"
+            android:layout_alignBottom="@+id/toggleButtonSun"
+            android:layout_toEndOf="@+id/toggleButtonSun" />
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonTue"
+            android:textOff="T"
+            android:textOn="T"
+            android:textColor="@color/toggle_colors"
+            android:layout_alignBaseline="@+id/toggleButtonMon"
+            android:layout_alignBottom="@+id/toggleButtonMon"
+            android:layout_toEndOf="@+id/toggleButtonMon" />
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonWed"
+            android:textOff="W"
+            android:textOn="W"
+            android:textColor="@color/toggle_colors"
+            android:layout_alignBaseline="@+id/toggleButtonTue"
+            android:layout_alignBottom="@+id/toggleButtonTue" />
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonThu"
+            android:textOff="TR"
+            android:textOn="TR"
+            android:textColor="@color/toggle_colors"
+            android:layout_below="@+id/toggleButtonWed"
+            android:layout_toEndOf="@+id/toggleButtonWed" />
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonFri"
+            android:textOff="F"
+            android:textOn="F"
+            android:textColor="@color/toggle_colors"
+            android:layout_below="@+id/toggleButtonThu"
+            android:layout_toStartOf="@+id/toggleButtonThu" />
+
+        <ToggleButton
+            android:text="ToggleButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/toggleButtonSat"
+            android:textOff="Sat"
+            android:textOn="Sat"
+            android:textColor="@color/toggle_colors"
+            android:layout_below="@+id/toggleButtonFri"
+            android:layout_alignStart="@+id/toggleButtonFri" />
+
+    </LinearLayout>
+
+    <TextView
+        android:text="What day would you like to start?"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:id="@+id/textView4"
+        android:layout_alignTop="@+id/dialog_date_date_picker"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>
