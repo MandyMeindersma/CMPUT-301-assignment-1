@@ -176,6 +176,24 @@ public class HabitTrackerTest {
 
     }
 
-
+    @Test
+    public void testTotalHabit(){
+        HabitList list = new HabitList();
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("love sarah",formatDate, false, false, false, false, false, false, false);
+        Habit o = new Habit("lovef sarah",formatDate, false, false, false, false, false, false, false);
+        Habit c = new Habit("loveg sarah",formatDate, false, false, false, false, false, false, false);
+        Habit d = new Habit("love sgarah",formatDate, false, false, false, false, false, false, false);
+        Habit y = new Habit("love hsarah",formatDate, false, false, false, false, false, false, false);
+        list.addHabit(a);
+        list.addHabit(o);
+        list.addHabit(c);
+        list.addHabit(d);
+        list.addHabit(y);
+        list.removeHabit(a);
+        Integer e =list.totalhabitsever();
+        Integer b = 5;
+        assertEquals(b, e);
+    }
 
 }

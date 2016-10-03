@@ -54,6 +54,7 @@ public class AddNew extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new);
+
     }
 
     public void saveHabit(View v){
@@ -82,41 +83,10 @@ public class AddNew extends AppCompatActivity {
         Habit newHabit = new Habit(HabitText.getText().toString(), formatDate, sunday, monday, tuesday, wednesday, thursday, friday, saturday);
 
         hc.addHabit(newHabit);
-        //adapter.notifyDataSetChanged();
-
-        //  saveInFile();
-
-
-
-
 
         this.finish();
     }
 
-
-
-
-
-   /* private void saveInFile() {
-        try {
-            FileOutputStream fos = openFileOutput(FILENAME,
-                    Context.MODE_APPEND);
-
-            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(fos));
-
-            Gson gson = new Gson();
-            gson.toJson(HabitList, out);
-            out.flush();
-
-            fos.close();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }*/
 
 
 }

@@ -14,6 +14,7 @@ public class HabitList {
 
     protected ArrayList<Habit> habits = null;
     protected ArrayList<Listener> listeners = null;
+    protected Integer habitCount = 0;
 
     public HabitList() {
         habits = new ArrayList<Habit>();
@@ -25,6 +26,7 @@ public class HabitList {
             throw new IllegalArgumentException();
         }
         habits.add(habit);
+        habitCount++;
         notifyListener();
     }
 
@@ -65,7 +67,9 @@ public class HabitList {
         notifyListener();
     }
 
-
+    public Integer totalhabitsever(){
+        return habitCount;
+    }
 
     public Integer getCount(){
         return habits.size();
