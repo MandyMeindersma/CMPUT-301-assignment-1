@@ -196,4 +196,15 @@ public class HabitTrackerTest {
         assertEquals(b, e);
     }
 
+    @Test
+    public void TestDaysofWeek(){
+        HabitList list = new HabitList();
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("love sarah",formatDate, false, true, false, false, false, false, false);
+        list.addHabit(a);
+        assertTrue("make sure monday is checked",a.getMonday());
+    }
+
+
+
 }

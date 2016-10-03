@@ -12,6 +12,8 @@
         See the License for the specific language governing permissions and
         limitations under the License.
 
+
+
 URL's I used as inspiration:
 
 https://www.youtube.com/watch?v=fxjIA4HIruU&index=4&list=PL240uJOh_Vb4PtMZ0f7N8ACYkCLv0673O
@@ -38,7 +40,9 @@ http://stackoverflow.com/questions/9652732/how-to-find-the-length-of-an-array-li
 
 http://stackoverflow.com/questions/18728470/android-how-i-can-get-size-of-string-array
 
-
+########################################################################
+I used a lot of stack overflow which uses the creative commons license
+#########################################################################
 
 */
 
@@ -82,7 +86,7 @@ import java.util.Collection;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
+    //method called when we click the fab button
     public void addNewActivity(View view){
         Intent intent = new Intent(this, AddNew.class);
         startActivity(intent);
@@ -106,13 +110,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        //getting list of habits
         ListView listview = (ListView) findViewById(R.id.HabitList);
         final ArrayList<Habit> habitsArrayList = HabitListController.getHabitList().getAllHabits();
         final ArrayAdapter<Habit> HabitAdapter = new ArrayAdapter<Habit>(this, android.R.layout.simple_list_item_1, habitsArrayList);
         listview.setAdapter(HabitAdapter);
-
-        //String[] means array of strings
 
         //added observer
         HabitListController.getHabitList().addListener(new Listener() {
@@ -122,6 +124,8 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+
+        //deleting habit with long click
         listview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -148,6 +152,7 @@ public class MainActivity extends AppCompatActivity
 
         });
 
+        //taken to singular activity when clicked using intent
         listview.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
@@ -182,20 +187,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -219,21 +210,18 @@ public class MainActivity extends AppCompatActivity
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
                     HabitListController.getHabitList().removeHabits();
-                    //added observer
-
 
                     HabitListController.getHabitList().notifyListener();
                     HabitListController.getHabitList().addListener(new Listener() {
                         @Override
                         public void update() {
+                            //updating the list once it gets deleted
                             ListView listview = (ListView) findViewById(R.id.HabitList);
                             final ArrayList<Habit> habitsArrayList = HabitListController.getHabitList().getAllHabits();
                             final ArrayAdapter<Habit> HabitAdapter = new ArrayAdapter<Habit>(MainActivity.this, android.R.layout.simple_list_item_1, habitsArrayList);
                             listview.setAdapter(HabitAdapter);
 
                             HabitAdapter.notifyDataSetChanged();
-
-
                         }
                     });
                     Toast.makeText(MainActivity.this,"All data has been deleted!",Toast.LENGTH_LONG).show();
