@@ -1,6 +1,5 @@
 Name: Mandy Meindersma
 CCID: meinders
-student number: 1433871
 
 Assignment 1
 
