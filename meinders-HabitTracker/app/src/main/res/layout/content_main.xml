@@ -20,7 +20,7 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/oldTweetsTitle"
+            android:id="@+id/HabitsTitle"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="My Habits" />

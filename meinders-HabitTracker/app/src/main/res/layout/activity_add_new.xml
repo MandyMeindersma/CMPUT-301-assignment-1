@@ -14,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/save" />
+        android:id="@+id/save"
+        android:onClick="saveHabit" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -36,12 +37,12 @@
         android:id="@+id/textView2"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:gravity="center"
-        android:layout_below="@+id/dialog_date_date_picker"
+        android:layout_below="@+id/startDatePicked"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
     <DatePicker
-        android:id="@+id/dialog_date_date_picker"
+        android:id="@+id/startDatePicked"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -154,7 +155,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:id="@+id/textView4"
-        android:layout_alignTop="@+id/dialog_date_date_picker"
+        android:layout_alignTop="@+id/startDatePicked"
         android:layout_centerHorizontal="true" />
 
 

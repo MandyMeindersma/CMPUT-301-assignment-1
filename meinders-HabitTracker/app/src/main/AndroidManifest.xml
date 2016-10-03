@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddNew" />
-        <activity android:name=".History_page"></activity>
+        <activity android:name=".History_page" />
+        <activity android:name=".SingularHabit"></activity>
     </application>
 
 </manifest>

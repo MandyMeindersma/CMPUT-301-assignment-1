@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -37,72 +39,65 @@ import java.util.Locale;
 
 import static com.example.meind.meinders_habittracker.R.id.habitText;
 import static com.example.meind.meinders_habittracker.R.id.HabitList;
+import static com.example.meind.meinders_habittracker.R.id.mini;
+import static com.example.meind.meinders_habittracker.R.id.toggleButtonSun;
 
 public class AddNew extends AppCompatActivity {
 
-    private static final String FILENAME = "file.sav";
-    private EditText HabitText;
+   //private static final String FILENAME = "file.sav";
 
+    private HabitList habitList;
 
-    private ListView oldHabitList;
-
-    public ArrayList<Habit> HabitList = new ArrayList<Habit>();
-
-    private ArrayAdapter<Habit> adapter;
+    //private ArrayAdapter<Habit> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new);
-
-
-        HabitText = (EditText) findViewById(R.id.habitText);
-        Button saveButton = (Button) findViewById(R.id.save);
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View v) {
-                setResult(RESULT_OK);
-                String text = HabitText.getText().toString();
-
-                Habit newHabit = new Habit(text,new Date());
-
-                HabitList.add(newHabit);
-                //adapter.notifyDataSetChanged();
-
-                saveInFile();
-
-
-            }
-        });
-
-
-
     }
 
-    private void loadFromFile() {
-        ArrayList<String> tweets = new ArrayList<String>();
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+    public void saveHabit(View v){
+        Toast.makeText(this, "Saved the habit!", Toast.LENGTH_SHORT).show();
+        HabitListController hc = new HabitListController();
+        EditText HabitText = (EditText) findViewById(R.id.habitText);
+        DatePicker startDate = (DatePicker) findViewById(R.id.startDatePicked);
+        Date start = new Date(startDate.getYear() - 1900, startDate.getMonth(), startDate.getDayOfMonth());
+        String formatDate = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(start);
 
-            Gson gson = new Gson();
+        ToggleButton sunButton = (ToggleButton) findViewById(R.id.toggleButtonSun);
+        Boolean sunday = sunButton.isChecked();
+        ToggleButton monButton = (ToggleButton) findViewById(R.id.toggleButtonMon);
+        Boolean monday = monButton.isChecked();
+        ToggleButton tueButton = (ToggleButton) findViewById(R.id.toggleButtonTue);
+        Boolean tuesday = tueButton.isChecked();
+        ToggleButton wedButton = (ToggleButton) findViewById(R.id.toggleButtonWed);
+        Boolean wednesday = wedButton.isChecked();
+        ToggleButton thuButton = (ToggleButton) findViewById(R.id.toggleButtonThu);
+        Boolean thursday = thuButton.isChecked();
+        ToggleButton friButton = (ToggleButton) findViewById(R.id.toggleButtonFri);
+        Boolean friday = friButton.isChecked();
+        ToggleButton satButton = (ToggleButton) findViewById(R.id.toggleButtonSat);
+        Boolean saturday = satButton.isChecked();
 
-            //code from //stack overfull rl
-            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
+        Habit newHabit = new Habit(HabitText.getText().toString(), formatDate, sunday, monday, tuesday, wednesday, thursday, friday, saturday);
 
-            HabitList = gson.fromJson(in, listType);
+        hc.addHabit(newHabit);
+        //adapter.notifyDataSetChanged();
 
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            HabitList = new ArrayList<Habit>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
+        //  saveInFile();
+
+
+
+
+
+        this.finish();
     }
 
-    private void saveInFile() {
+
+
+
+
+   /* private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
                     Context.MODE_APPEND);
@@ -121,7 +116,7 @@ public class AddNew extends AppCompatActivity {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
-    }
+    }*/
 
 
 }

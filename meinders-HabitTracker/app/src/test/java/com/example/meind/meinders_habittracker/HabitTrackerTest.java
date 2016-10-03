@@ -5,9 +5,12 @@ import android.test.AndroidTestCase;
 
 import org.junit.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import static junit.framework.Assert.*;
 
@@ -21,7 +24,8 @@ public class HabitTrackerTest {
     @Test
     public void addHabit() {
         String stringA = "Take pill";
-        Habit aHabit = new Habit(stringA);
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit aHabit = new Habit(stringA,formatDate, false, false, false, false, false, false, false);
         assertTrue("String not equal", stringA.equals(aHabit.getHabit()));
     }
 
@@ -29,17 +33,38 @@ public class HabitTrackerTest {
     @Test
     public void testAddHabit(){
         HabitList list = new HabitList();
-
-        Habit habit = new Habit("Hello!",new Date());
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit habit = new Habit("Hello!",formatDate, false, false, false, false, false, false, false);
         list.addHabit(habit);
         assertTrue(list.hasHabit(habit));
+    }
+
+
+    @Test
+    public void testGetAllHabits(){
+        HabitList list = new HabitList();
+
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+
+        Habit habit = new Habit("take medication",formatDate, false, false, false, false, false, false, false);
+        Habit habit2 = new Habit("take more medication",formatDate, false, false, false, false, false, false, false);
+
+        assertFalse(list.hasHabit(habit));
+        list.addHabit(habit);
+        list.addHabit(habit2);
+        assertTrue(list.hasHabit(habit));
+
+
+
+        assertTrue("must have 2 elements",list.getAllHabits().size()==2);
     }
 
     @Test
     public void testHasHabit(){
         HabitList list = new HabitList();
 
-        Habit habit = new Habit("take medication",new Date());
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit habit = new Habit("take medication",formatDate, false, false, false, false, false, false, false);
 
         assertFalse(list.hasHabit(habit));
         list.addHabit(habit);
@@ -51,8 +76,9 @@ public class HabitTrackerTest {
     public void testGetHabit(){
         HabitList list = new HabitList();
 
-        Habit a = new Habit("wash face",new Date());
-        Habit b = new Habit("brush teeth",new Date());
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("wash face",formatDate, false, false, false, false, false, false, false);
+        Habit b = new Habit("brush teeth",formatDate, false, false, false, false, false, false, false);
 
         list.addHabit(a);
         list.addHabit(b);
@@ -64,7 +90,8 @@ public class HabitTrackerTest {
     @Test
     public void testDeleteHabit(){
         HabitList list = new HabitList();
-        Habit a = new Habit("love sarah",new Date());
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("love sarah",formatDate, false, false, false, false, false, false, false);
         list.addHabit(a);
         assertTrue(list.hasHabit(a));
 
@@ -77,8 +104,9 @@ public class HabitTrackerTest {
     public void testGetCount(){
         HabitList list = new HabitList();
         assertTrue(list.getCount().equals(0));
-        Habit a = new Habit("walk",new Date());
-        Habit b = new Habit("run",new Date());
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("walk",formatDate, false, false, false, false, false, false, false);
+        Habit b = new Habit("run",formatDate, false, false, false, false, false, false, false);
 
         list.addHabit(a);
         list.addHabit(b);
@@ -86,29 +114,41 @@ public class HabitTrackerTest {
         assertTrue(list.getCount().equals(2));
     }
 
+
+    boolean updated = false;
     @Test
-    public void testGetHabits(){
-        HabitList list = new HabitList();
-        assertTrue(list.getCount().equals(0));
-        Date jan1 = new GregorianCalendar(2016, Calendar.JANUARY, 1).getTime();
-        Date jan2 = new GregorianCalendar(2016, Calendar.JANUARY, 2).getTime();
-        Date jan3 = new GregorianCalendar(2016, Calendar.JANUARY, 3).getTime();
-        Habit a = new Habit("a",jan1);
-        Habit b = new Habit("b",jan2);
-        Habit c = new Habit("c",jan3);
-
-
-        list.addHabit(b);
-        list.addHabit(a);
-        list.addHabit(c);
-
-
-        assertEquals(a, list.getHabits().get(2));
-        assertEquals(b, list.getHabits().get(1));
-        assertEquals(c, list.getHabits().get(0));
-
+    public void testNotifyListeners(){
+        HabitList habitList = new HabitList();
+        updated = false;
+        Listener l = new Listener(){
+            public void update(){
+                HabitTrackerTest.this.updated = true;
+            }
+        };
+        habitList.addListener(l);
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("walk",formatDate, false, false, false, false, false, false, false);
+        habitList.addHabit(a);
+        assertTrue("didn't fire update",this.updated);
     }
 
+
+
+    @Test
+    public void testRemoveListeners(){
+        HabitList habitList = new HabitList();
+        Listener l = new Listener(){
+            public void update(){
+                HabitTrackerTest.this.updated = true;
+            }
+        };
+        habitList.addListener(l);
+        habitList.removeListener(l);
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("walk",formatDate, false, false, false, false, false, false, false);
+        habitList.addHabit(a);
+        assertFalse("didn't fire update",this.updated);
+    }
 
 
 
