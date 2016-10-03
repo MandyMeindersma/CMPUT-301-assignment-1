@@ -151,6 +151,30 @@ public class HabitTrackerTest {
     }
 
 
+    @Test
+    public void testAddRemoveCompletion(){
+        HabitList list = new HabitList();
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("love sarah",formatDate, false, false, false, false, false, false, false);
+        list.addHabit(a);
+        a.addComplete(formatDate);
+
+        Integer i=0;
+        a.removeComplete(formatDate);
+        assertTrue("see if it works", a.getNumCompletions()==0);
+
+    }
+
+    @Test
+    public void testgetCompletions(){
+        HabitList list = new HabitList();
+        String formatDate = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH).format(new Date());
+        Habit a = new Habit("love sarah",formatDate, false, false, false, false, false, false, false);
+        list.addHabit(a);
+        a.addComplete(formatDate);
+        assertTrue(1==a.getNumCompletions());
+
+    }
 
 
 

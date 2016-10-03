@@ -135,18 +135,7 @@ public class MainActivity extends AppCompatActivity
                     }
                 });
                 adb.show();
-
-                //added observer
-                //HabitListController.getHabitList().addListener(new Listener() {
-                    //@Override
-                   // public void update() {
-                        //HabitAdapter.notifyDataSetChanged();
-                   // }
-                //});
                 return false;
-
-
-
 
             }
 
@@ -155,51 +144,15 @@ public class MainActivity extends AppCompatActivity
         listview.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                //Intent intent;
-                //intent = new Intent(this, SingularHabit.class);
-                //startActivity(intent);
+                HabitListController.setViewHabit(position);
+                Intent intent = new Intent(MainActivity.this, SingularHabit.class);
+                startActivity(intent);
 
             }
 
         });
 
-
-
-
-
-
-
-
     }
-
-
-
-    /*private void loadFromFile() {
-        ArrayList<String> tweets = new ArrayList<String>();
-        try {
-            FileInputStream fis = openFileInput(FILENAME);
-            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
-
-            Gson gson = new Gson();
-
-            //code from //stack overfull rl
-            Type listType = new TypeToken<ArrayList<Habit>>(){}.getType();
-
-            HabitList = gson.fromJson(in, listType);
-
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            HabitList = new ArrayList<Habit>();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException();
-        }
-    }*/
-
-
-
-
-
 
 
 
@@ -258,6 +211,24 @@ public class MainActivity extends AppCompatActivity
             alertDialogBuilder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface arg0, int arg1) {
+                    HabitListController.getHabitList().removeHabits();
+                    //added observer
+
+
+                    HabitListController.getHabitList().notifyListener();
+                    HabitListController.getHabitList().addListener(new Listener() {
+                        @Override
+                        public void update() {
+                            ListView listview = (ListView) findViewById(R.id.HabitList);
+                            final ArrayList<Habit> habitsArrayList = HabitListController.getHabitList().getAllHabits();
+                            final ArrayAdapter<Habit> HabitAdapter = new ArrayAdapter<Habit>(MainActivity.this, android.R.layout.simple_list_item_1, habitsArrayList);
+                            listview.setAdapter(HabitAdapter);
+
+                            HabitAdapter.notifyDataSetChanged();
+
+
+                        }
+                    });
                     Toast.makeText(MainActivity.this,"All data has been deleted!",Toast.LENGTH_LONG).show();
                 }
             });
@@ -272,11 +243,7 @@ public class MainActivity extends AppCompatActivity
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
 
-        } //else if (id == R.id.nav_manage) {
-
-       // } else if (id == R.id.nav_share) {
-
-        //}
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

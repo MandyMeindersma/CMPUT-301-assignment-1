@@ -22,74 +22,83 @@
         <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher"
+            app:srcCompat="@android:drawable/btn_star"
             android:id="@+id/imageButton"
             android:layout_weight="1"
-            android:background="@color/colorAccent" />
+            android:background="@color/colorAccent"
+            android:onClick="gotCompletion" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:layout_weight="1"
+            android:layout_height="40dp"
+            android:layout_weight="0.04"
             android:weightSum="7">
 
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="Sun"
+                android:paddingTop="@dimen/activity_vertical_margin"
                 android:ems="10"
                 android:id="@+id/sunText"
+                android:gravity='center'
                 android:layout_weight="1" />
 
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="M"
                 android:ems="10"
                 android:id="@+id/monText"
+                android:gravity='center'
                 android:layout_weight="1" />
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="T"
                 android:ems="10"
                 android:id="@+id/tueText"
+                android:gravity='center'
                 android:layout_weight="1" />
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="W"
                 android:ems="10"
                 android:id="@+id/wedText"
+                android:gravity='center'
                 android:layout_weight="1" />
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="Th"
                 android:ems="10"
                 android:id="@+id/thuText"
+                android:gravity='center'
                 android:layout_weight="1" />
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="F"
                 android:ems="10"
+                android:gravity='center'
                 android:id="@+id/friText"
                 android:layout_weight="1" />
-            <EditText
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
                 android:text="Sat"
                 android:ems="10"
+                android:gravity='center'
                 android:id="@+id/satText"
                 android:layout_weight="1" />
 
@@ -98,11 +107,30 @@
 
 
         </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Completions:"
+            android:height="40dp"
+            android:layout_weight="1" />
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="283dp"
-            android:layout_weight="2"/>
+            android:layout_weight="2"
+            android:id="@+id/CompletionList" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="Total Completions: "
+            android:height="40dp"
+            android:textColor="#FFEF6695"
+            android:paddingLeft="30dp"
+            android:layout_weight="1"
+            android:id="@+id/total"/>
 
 
     </LinearLayout>

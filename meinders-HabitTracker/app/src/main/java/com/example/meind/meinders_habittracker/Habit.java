@@ -1,6 +1,7 @@
 package com.example.meind.meinders_habittracker;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -19,6 +20,7 @@ public class Habit implements Comparable{
     private Boolean thursday;
     private Boolean friday;
     private Boolean saturday;
+    protected ArrayList<String> completes = new ArrayList<String>();
 
 
 
@@ -36,11 +38,7 @@ public class Habit implements Comparable{
         this.saturday=saturday;
     }
 
-    public void setDate(String date) {
-
-        this.date = date;
-    }
-
+    public void setDate(String date) {this.date = date;}
 
     public String getHabit() {
         return Habit;
@@ -59,10 +57,56 @@ public class Habit implements Comparable{
         return  Habit;
     }
 
+    public void addComplete(String date){
+        completes.add(date);
+    }
+
+    public boolean getSunday(){
+        return sunday;
+    }
+
+    public boolean getMonday(){
+        return monday;
+    }
+
+    public boolean getTuesday(){
+        return tuesday;
+    }
+
+    public boolean getWednesday(){
+        return wednesday;
+    }
+
+    public boolean getThursday(){
+        return thursday;
+    }
+
+    public boolean getFriday(){
+        return friday;
+    }
+
+    public boolean getSaturday(){
+        return saturday;
+    }
+
+    public void removeComplete(String date){
+        completes.remove(date);
+
+    }
+
+    public String getDate(Integer position){
+        return completes.get(position);
+    }
 
 
+    public ArrayList<String> getCompletions(){
+        return completes;
+    }
 
+    public Integer getNumCompletions(){
 
+        return completes.size();
+    }
 
     @Override
     public int compareTo(Object o) {

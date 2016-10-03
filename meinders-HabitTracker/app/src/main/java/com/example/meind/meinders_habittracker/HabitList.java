@@ -28,11 +28,17 @@ public class HabitList {
         notifyListener();
     }
 
-    private void notifyListener() {
+    public void notifyListener() {
         for (Listener  listener : listeners) {
             listener.update();
         }
     }
+
+    public void removeHabits(){
+        habits.clear();
+        notifyListener();
+    }
+
 
     public void addListener(Listener l) {
         listeners.add(l);
@@ -41,10 +47,6 @@ public class HabitList {
     public void removeListener(Listener l) {
         listeners.remove(l);
     }
-
-
-
-
 
     public boolean hasHabit(Habit habit){
         return habits.contains(habit);

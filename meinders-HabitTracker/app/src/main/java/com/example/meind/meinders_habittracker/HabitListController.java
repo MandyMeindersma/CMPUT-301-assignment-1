@@ -15,6 +15,7 @@ public class HabitListController {
 
     //lazy singleton
     private static HabitList habitList = null;
+    private static Integer ViewPosition;
 
     //as long as I call get habit list (which is static and says the same, I should be fine
 
@@ -35,6 +36,15 @@ public class HabitListController {
     public HabitList showAllHabit(){
         return getHabitList();
     }
+
+    public static void setViewHabit(Integer position){
+        ViewPosition = position;
+    }
+
+    public static Habit getViewHabit(){
+        return habitList.getHabit(ViewPosition);
+    }
+
 
 
 }
